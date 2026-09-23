@@ -46,7 +46,58 @@
 
       <p>When such a region exists, it&rsquo;s called the radius of convergence.</p>
 
-      <a href="wobble.html" class="interactive-link">Interactive demo: drag N and watch the wobbling &rarr;</a>
+      <div style="margin: 2rem 0;">
+      <p style="font-family: Cormorant Garamond, Georgia, serif; font-size: 0.95rem; color: #5c574e; font-style: italic; margin-bottom: 0.8rem;">Drag the slider to watch the partial sum wobble between bowl and S-shape as N increases:</p>
+      <canvas id="plot" width="680" height="420" style="width:100%; border:1px solid #cdc6b8; background:#fff;"></canvas>
+      <div style="margin-top:1rem; display:flex; align-items:center; gap:1rem; font-family:Cormorant Garamond,Georgia,serif;">
+        <label style="font-size:1rem; color:#4a4640;">N =</label>
+        <input type="range" id="slider" min="1" max="30" value="1" style="width:250px;">
+        <span id="nDisplay" style="font-size:1.2rem; color:#2c2a26; font-weight:bold; min-width:2rem; text-align:center;">1</span>
+      </div>
+      <div style="margin-top:0.5rem; font-family:Cormorant Garamond,Georgia,serif; font-size:0.8rem; color:#8a8377; display:flex; gap:2rem;">
+        <span>Blue: partial sum</span>
+        <span>Dashed: 1/(1&minus;x)</span>
+        <span>Orange: radius of convergence</span>
+      </div>
+      </div>
+      <script>
+        const canvas = document.getElementById("plot");
+        const ctx = canvas.getContext("2d");
+        const slider = document.getElementById("slider");
+        const nDisplay = document.getElementById("nDisplay");
+        const W = canvas.width, H = canvas.height;
+        const xMin=-2,xMax=2,yMin=-6,yMax=10;
+        function toX(x){return(x-xMin)/(xMax-xMin)*W;}
+        function toY(y){return H-(y-yMin)/(yMax-yMin)*H;}
+        function psum(x,n){let s=0,xn=1;for(let k=0;k<=n;k++){s+=xn;xn*=x;}return s;}
+        function draw(n){
+          ctx.clearRect(0,0,W,H);ctx.fillStyle="#fff";ctx.fillRect(0,0,W,H);
+          ctx.strokeStyle="#eee";ctx.lineWidth=0.5;
+          for(let i=Math.ceil(xMin);i<=Math.floor(xMax);i++){ctx.beginPath();ctx.moveTo(toX(i),0);ctx.lineTo(toX(i),H);ctx.stroke();}
+          for(let i=Math.ceil(yMin);i<=Math.floor(yMax);i++){ctx.beginPath();ctx.moveTo(0,toY(i));ctx.lineTo(W,toY(i));ctx.stroke();}
+          ctx.strokeStyle="#999";ctx.lineWidth=1;
+          ctx.beginPath();ctx.moveTo(toX(xMin),toY(0));ctx.lineTo(toX(xMax),toY(0));ctx.stroke();
+          ctx.beginPath();ctx.moveTo(toX(0),toY(yMin));ctx.lineTo(toX(0),toY(yMax));ctx.stroke();
+          ctx.fillStyle="#999";ctx.font="11px Georgia";
+          for(let i=Math.ceil(xMin);i<=Math.floor(xMax);i++){if(i!==0)ctx.fillText(i,toX(i)-4,toY(0)+15);}
+          for(let i=Math.ceil(yMin);i<=Math.floor(yMax);i+=2){if(i!==0)ctx.fillText(i,toX(0)+5,toY(i)+4);}
+          ctx.strokeStyle="#d4a373";ctx.lineWidth=1.5;ctx.setLineDash([6,4]);
+          ctx.beginPath();ctx.moveTo(toX(-1),0);ctx.lineTo(toX(-1),H);ctx.stroke();
+          ctx.beginPath();ctx.moveTo(toX(1),0);ctx.lineTo(toX(1),H);ctx.stroke();ctx.setLineDash([]);
+          ctx.strokeStyle="#c4c4c4";ctx.lineWidth=1.5;ctx.setLineDash([5,5]);ctx.beginPath();
+          let s=false;
+          for(let px=0;px<W;px++){let x=xMin+(px/W)*(xMax-xMin);if(Math.abs(x-1)<0.03){s=false;continue;}
+          let y=1/(1-x);if(y<yMin||y>yMax){s=false;continue;}let cy=toY(y);if(!s){ctx.moveTo(px,cy);s=true;}else{ctx.lineTo(px,cy);}}
+          ctx.stroke();ctx.setLineDash([]);
+          ctx.strokeStyle="#2c5f8a";ctx.lineWidth=2.5;ctx.beginPath();s=false;
+          for(let px=0;px<W;px++){let x=xMin+(px/W)*(xMax-xMin);let y=psum(x,n);if(y<yMin-2||y>yMax+2){s=false;continue;}
+          let cy=toY(y);if(!s){ctx.moveTo(px,cy);s=true;}else{ctx.lineTo(px,cy);}}ctx.stroke();
+          ctx.fillStyle="#2c2a26";ctx.font="14px Georgia";
+          let lbl=(n%2===0)?"bowl (even degree)":"S-shape (odd degree)";ctx.fillText("N = "+n+"  →  "+lbl,15,25);
+        }
+        slider.addEventListener("input",function(){let n=parseInt(this.value);nDisplay.textContent=n;draw(n);});
+        draw(1);
+      </script>
 
       <p class="footnote"><strong>Note:</strong> Divergence at the boundary of the radius of convergence can arise from different sources: the function may take on multiple values (as with complex-valued functions) or the boundary may coincide with a singularity of the function, such as the pole at x&nbsp;=&nbsp;1 for 1/(1&minus;x).</p>
     </div>
