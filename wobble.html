@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Power Series Wobbling</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #f5f1eb; font-family: 'Georgia', serif; display: flex; flex-direction: column; align-items: center; padding: 2rem; }
+    h2 { font-size: 1.3rem; font-weight: 400; color: #2c2a26; margin-bottom: 0.5rem; }
+    .equation { font-family: 'Georgia', serif; font-size: 1rem; color: #5c574e; margin-bottom: 1.5rem; font-style: italic; }
+    canvas { border: 1px solid #cdc6b8; background: #fff; max-width: 100%; }
+    .controls { margin-top: 1.5rem; display: flex; align-items: center; gap: 1rem; }
+    .controls label { font-size: 1rem; color: #4a4640; }
+    .controls input[type="range"] { width: 300px; }
+    .controls .n-val { font-size: 1.2rem; color: #2c2a26; font-weight: bold; min-width: 2.5rem; text-align: center; }
+    .legend { margin-top: 1rem; font-size: 0.85rem; color: #8a8377; display: flex; gap: 2rem; }
+    .legend-item { display: flex; align-items: center; gap: 0.4rem; }
+    .legend-swatch { width: 20px; height: 3px; display: inline-block; }
+  </style>
+</head>
+<body>
+  <h2>Partial Sums of 1/(1−x) = Σ xⁿ</h2>
+  <p class="equation">S<sub>N</sub>(x) = 1 + x + x² + ⋯ + x<sup>N</sup></p>
+  <canvas id="plot" width="700" height="450"></canvas>
+  <div class="controls">
+    <label>N =</label>
+    <input type="range" id="slider" min="1" max="30" value="1">
+    <span class="n-val" id="nDisplay">1</span>
+  </div>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-swatch" style="background:#2c5f8a;"></span> Partial sum S<sub>N</sub>(x)</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#c4c4c4; border-top: 2px dashed #c4c4c4; height:0;"></span> 1/(1−x)</div>
+    <div class="legend-item"><span class="legend-swatch" style="background:#d4a373;"></span> Radius of convergence</div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('plot');
+    const ctx = canvas.getContext('2d');
+    const slider = document.getElementById('slider');
+    const nDisplay = document.getElementById('nDisplay');
+
+    const W = canvas.width;
+    const H = canvas.height;
+    const xMin = -2.0;
+    const xMax = 2.0;
+    const yMin = -6;
+    const yMax = 10;
+
+    function toCanvasX(x) { return (x - xMin) / (xMax - xMin) * W; }
+    function toCanvasY(y) { return H - (y - yMin) / (yMax - yMin) * H; }
+
+    function partialSum(x, n) {
+      let s = 0;
+      let xn = 1;
+      for (let k = 0; k <= n; k++) {
+        s += xn;
+        xn *= x;
+      }
+      return s;
+    }
+
+    function draw(n) {
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, W, H);
+
+      // Grid
+      ctx.strokeStyle = '#eee';
+      ctx.lineWidth = 0.5;
+      for (let i = Math.ceil(xMin); i <= Math.floor(xMax); i++) {
+        ctx.beginPath();
+        ctx.moveTo(toCanvasX(i), 0);
+        ctx.lineTo(toCanvasX(i), H);
+        ctx.stroke();
+      }
+      for (let i = Math.ceil(yMin); i <= Math.floor(yMax); i++) {
+        ctx.beginPath();
+        ctx.moveTo(0, toCanvasY(i));
+        ctx.lineTo(W, toCanvasY(i));
+        ctx.stroke();
+      }
+
+      // Axes
+      ctx.strokeStyle = '#999';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(toCanvasX(xMin), toCanvasY(0));
+      ctx.lineTo(toCanvasX(xMax), toCanvasY(0));
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(toCanvasX(0), toCanvasY(yMin));
+      ctx.lineTo(toCanvasX(0), toCanvasY(yMax));
+      ctx.stroke();
+
+      // Axis labels
+      ctx.fillStyle = '#999';
+      ctx.font = '11px Georgia';
+      for (let i = Math.ceil(xMin); i <= Math.floor(xMax); i++) {
+        if (i !== 0) ctx.fillText(i, toCanvasX(i) - 4, toCanvasY(0) + 15);
+      }
+      for (let i = Math.ceil(yMin); i <= Math.floor(yMax); i += 2) {
+        if (i !== 0) ctx.fillText(i, toCanvasX(0) + 5, toCanvasY(i) + 4);
+      }
+
+      // Radius of convergence lines
+      ctx.strokeStyle = '#d4a373';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([6, 4]);
+      ctx.beginPath();
+      ctx.moveTo(toCanvasX(-1), 0);
+      ctx.lineTo(toCanvasX(-1), H);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(toCanvasX(1), 0);
+      ctx.lineTo(toCanvasX(1), H);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Target function 1/(1-x) — only plot where it's reasonable
+      ctx.strokeStyle = '#c4c4c4';
+      ctx.lineWidth = 1.5;
+      ctx.setLineDash([5, 5]);
+      ctx.beginPath();
+      let started = false;
+      for (let px = 0; px < W; px++) {
+        let x = xMin + (px / W) * (xMax - xMin);
+        if (Math.abs(x - 1) < 0.03) { started = false; continue; }
+        let y = 1 / (1 - x);
+        if (y < yMin || y > yMax) { started = false; continue; }
+        let cy = toCanvasY(y);
+        if (!started) { ctx.moveTo(px, cy); started = true; }
+        else { ctx.lineTo(px, cy); }
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Partial sum
+      ctx.strokeStyle = '#2c5f8a';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      started = false;
+      for (let px = 0; px < W; px++) {
+        let x = xMin + (px / W) * (xMax - xMin);
+        let y = partialSum(x, n);
+        if (y < yMin - 2 || y > yMax + 2) { started = false; continue; }
+        let cy = toCanvasY(y);
+        if (!started) { ctx.moveTo(px, cy); started = true; }
+        else { ctx.lineTo(px, cy); }
+      }
+      ctx.stroke();
+
+      // Label
+      ctx.fillStyle = '#2c2a26';
+      ctx.font = '14px Georgia';
+      let shapeLabel = (n % 2 === 0) ? 'bowl (even degree)' : 'S-shape (odd degree)';
+      ctx.fillText('N = ' + n + '  →  ' + shapeLabel, 15, 25);
+    }
+
+    slider.addEventListener('input', function() {
+      let n = parseInt(this.value);
+      nDisplay.textContent = n;
+      draw(n);
+    });
+
+    draw(1);
+  </script>
+</body>
+</html>
