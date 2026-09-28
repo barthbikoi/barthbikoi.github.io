@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Limitations of Formal Logic Applied to Natural Language: Two Case Studies from the New Testament — by Barth Bikoi">
+  <title>Limitations of Formal Logic — Barth Bikoi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #f5f1eb; color: #2c2a26; min-height: 100vh; font-family: 'EB Garamond', 'Georgia', serif; padding: 2rem 1.5rem; }
+    .container { max-width: 680px; width: 100%; margin: 0 auto; }
+    .site-name { font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 1.1rem; font-weight: 400; color: #4a4640; letter-spacing: 0.08em; margin-bottom: 3rem; text-transform: lowercase; }
+    .site-name a { color: inherit; text-decoration: none; }
+    .site-name a:hover { color: #2c2a26; }
+    .essay-title { font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 2rem; font-weight: 400; color: #2c2a26; line-height: 1.4; margin-bottom: 0.5rem; }
+    .essay-subtitle { font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 1rem; color: #a59e93; font-style: italic; margin-bottom: 2.5rem; }
+    .essay-body { font-family: 'EB Garamond', 'Georgia', serif; font-size: 1.15rem; line-height: 1.9; color: #3a3732; }
+    .essay-body p { margin-bottom: 1.5rem; }
+
+    .section-heading { font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 1.4rem; font-weight: 500; color: #2c2a26; margin-top: 2.5rem; margin-bottom: 1rem; }
+    .sub-heading { font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 1.15rem; font-weight: 500; color: #3a3732; margin-top: 2rem; margin-bottom: 0.75rem; font-style: italic; }
+
+    .logic-block { background: #eee9df; border-left: 3px solid #c4b8a8; padding: 1rem 1.25rem; margin: 1.25rem 0; font-family: 'EB Garamond', 'Georgia', serif; font-size: 1.05rem; line-height: 1.8; }
+    .logic-block p { margin-bottom: 0.5rem; }
+    .logic-block p:last-child { margin-bottom: 0; }
+
+    .scripture-ref { font-weight: 500; color: #5c574e; }
+    .comment { font-style: italic; color: #6b655b; }
+    .fallacy-label { color: #8b4513; font-style: italic; }
+
+    .tempting-verse { margin-bottom: 1.5rem; }
+    .tempting-verse .verse-ref { font-weight: 500; }
+
+    .essay-note { font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 0.95rem; color: #8a8377; margin-top: 3rem; font-style: italic; border-top: 1px solid #d5cec3; padding-top: 1.5rem; }
+
+    .essay-sign { font-family: 'Cormorant Garamond', 'Georgia', serif; font-size: 0.95rem; color: #8a8377; margin-top: 2rem; font-style: italic; }
+
+    @media (max-width: 500px) {
+      body { padding: 1.5rem 1rem; }
+      .essay-title { font-size: 1.6rem; }
+      .essay-body { font-size: 1.05rem; }
+      .logic-block { padding: 0.75rem 1rem; font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <p class="site-name"><a href="/">barth bikoi</a></p>
+
+    <h1 class="essay-title">Limitations of Formal Logic Applied to Natural Language</h1>
+    <p class="essay-subtitle">two case studies from the New Testament</p>
+
+    <div class="essay-body">
+      <p>What started out as an attempt to formalize two claims of the New Testament ended in heresy in one case and an unprovable premise in the other. The two claims are as follows:</p>
+
+      <p><strong>Claim 1.1:</strong> &ldquo;&hellip; I am in the Father and the Father is in me; &hellip;&rdquo; <span class="scripture-ref">John 14:11</span></p>
+      <p><strong>Claim 1.2:</strong> &ldquo;&hellip; I am in my Father, and you are in me, and I am in you.&rdquo; <span class="scripture-ref">John 14:20</span></p>
+
+      <!-- Theorem 1 -->
+      <div class="logic-block">
+        <p><strong>Theorem 1:</strong> Let A and B be sets. If A &sub; B and B &sub; A then A = B</p>
+        <p class="comment">(*the proof is popular and is therefore omitted)</p>
+      </div>
+
+      <h2 class="sub-heading">Application of Theorem 1 to Claim 1.1</h2>
+      <div class="logic-block">
+        <p>Jesus &sub; Father, and Father &sub; Jesus &rArr; Jesus = Father = God</p>
+        <p class="comment">comment: This establishes the deity of Jesus logically within the premises of the text</p>
+      </div>
+
+      <h2 class="sub-heading">Application of Theorem 1 to Claim 1.2</h2>
+      <div class="logic-block">
+        <p>Jesus &sub; Father</p>
+        <p>and Disciples &sub; Jesus, and Jesus &sub; Disciples: But this implies by Theorem 1 that Disciples = Jesus</p>
+        <p>But since Jesus = God, by transitive property, the Disciples = God</p>
+      </div>
+
+      <!-- The problem of Claim 1 -->
+      <h2 class="section-heading">The Problem of Claim 1</h2>
+
+      <p>The application of theorem 1 to claim 1.2 leads to the logical deduction that disciples are also God. But the disciples are creatures. Thus this valid logical deduction produces the heresy known as Pantheism &mdash; the claim that creatures share God&rsquo;s essence. This problem arises from the use of the word <em>in</em>, within the same speech, at the same event, to mean two different things. If it did not mean 2 different things then the disciples would have understood themselves to be equal to god. But they did not (<span class="scripture-ref">Acts 14:14&ndash;15</span>). And since the speaker (Jesus) would not have equivocated with the intention to mislead (<span class="scripture-ref">James 1:13</span>), and neither could he have intended to mean that he is not God (<span class="scripture-ref">Philippians 2:6</span>); that means he knew his audience would be able to parse the difference. How so; by context, shared assumption, and theological intuition.</p>
+
+      <!-- Claim 2 -->
+      <h2 class="section-heading">Claim 2</h2>
+
+      <p>&ldquo;If Christ has not been raised, your faith is futile and* you are still in your sins.&rdquo; <span class="scripture-ref">1 Corinthians 15</span></p>
+      <p class="comment" style="margin-top: -0.75rem; margin-bottom: 1.5rem;">Note*: the New International Version (NIV) translation of the NT uses a semi-colon instead of the <em>and</em> conjunctive.</p>
+
+      <p>Let&rsquo;s define the following propositions and their negations after:</p>
+      <div class="logic-block">
+        <p>P = Christ has been raised</p>
+        <p>Q = Your faith is futile</p>
+        <p>S = You are still in your sins</p>
+        <p style="margin-top: 0.75rem;">&sim;P = Christ has not been raised</p>
+        <p>&sim;Q = Your faith is not futile</p>
+        <p>&sim;S = You are not still in your sins</p>
+      </div>
+
+      <p>The formal statement of Claim 2 is as follows:</p>
+      <div class="logic-block">
+        <p>&sim;P &rarr; Q &and; S</p>
+        <p style="margin-top: 0.5rem;">Which stated equivalently in the contrapositive form is as follows:</p>
+        <p>(&sim;Q &or; &sim;S) &rarr; P</p>
+      </div>
+
+      <p>To demonstrate the Paul&rsquo;s assertion is more than apostolic authority we attempt the following two arguments. Propositions will be supported by passages in scripture to ground the arguments in premises the Corinthians themselves would have accepted:</p>
+
+      <h2 class="sub-heading">Argument 1: A Direct proof for &sim;P &rarr; Q &and; S</h2>
+      <div class="logic-block">
+        <p>let &sim;P:</p>
+        <p>&sim;P &rarr; Death had a hold over him [<span class="scripture-ref">Acts 2:24</span> stated in contrapositive]</p>
+        <p>Death had a hold over him &rarr; he was not sinless [<span class="fallacy-label">undetected</span>]</p>
+        <p class="comment">the result is a contradiction because the Corinthians would have accepted that Christ is sinless [<span class="scripture-ref">Hebrews 9:14, Exodus 12:5, 1 Peter 1:19</span>]</p>
+        <p style="margin-top: 0.5rem;"><strong>Conclusion:</strong> P is true and therefore Christ did rise from the dead</p>
+      </div>
+
+      <h2 class="sub-heading">Argument 2: A proof of the contrapositive (&sim;Q &or; &sim;S) &rarr; P</h2>
+      <div class="logic-block">
+        <p>let (&sim;Q &or; &sim;S) because &sim;S [<span class="scripture-ref">1 Corinthians 1:2</span>]</p>
+        <p>(&sim;Q &or; &sim;S) &rarr; your sins were atoned for [by definition; also <span class="scripture-ref">1 Corinthians 15:3</span>]</p>
+        <p>your sins were atoned for &rarr; the atoning object was sinless [<span class="scripture-ref">Exodus 12:5, Hebrews 9:14, 1 Peter 1:19</span>]</p>
+        <p>the atoning object was sinless &rarr; death could not hold it [<span class="fallacy-label">undetected</span>]</p>
+      </div>
+
+      <!-- The problem of Claim 2 -->
+      <h2 class="section-heading">The Problem of Claim 2</h2>
+
+      <p>Thus the following premise in Argument 1, that:</p>
+      <div class="logic-block">
+        <p>&ldquo;Death had a hold over him &rarr; he was not sinless&rdquo;</p>
+        <p style="margin-top: 0.5rem;">and its contrapositive in Argument 2, that:</p>
+        <p>&ldquo;the atoning object was sinless &rarr; death could not hold it&rdquo;</p>
+      </div>
+      <p>are not detectable from Scripture.</p>
+
+      <!-- Tempting fallacies -->
+      <h2 class="section-heading">Tempting Fallacies</h2>
+
+      <p>Some tempting passages to justify the aforementioned can induce a few logical fallacies:</p>
+
+      <div class="tempting-verse">
+        <p><span class="verse-ref scripture-ref">Genesis 2:17:</span> &ldquo;&hellip; in the day you eat of it you shall surely die&rdquo;</p>
+        <div class="logic-block">
+          <p><em>Statement:</em> If you eat (disobey and hence sin) then you will die</p>
+          <p><em>Contrapositive:</em> If you do not die then you did not eat</p>
+          <p><em>Inverse:</em> If you do not eat then you will not die</p>
+          <p><em>Converse:</em> If you died then you ate (We sin because we will die)</p>
+        </div>
+        <p>Neither the inverse, which is what I need, nor the converse (which admittedly is a bit funny when reading it out loud) are logically guaranteed; and so cannot be presumed without having been given by the text axiomatically.</p>
+      </div>
+
+      <div class="tempting-verse">
+        <p><span class="verse-ref scripture-ref">Romans 5:12:</span> &ldquo;sin entered the world through one man, and death through sin.&rdquo;</p>
+        <div class="logic-block">
+          <p><em>Statement:</em> one man&rsquo;s sin &rarr; sin &rarr; death</p>
+          <p><em>What is allowed:</em> Sin &rarr; death</p>
+          <p><span class="fallacy-label">Fallacy:</span> &sim;Sin &rarr; &sim;death ; again unless given</p>
+        </div>
+      </div>
+
+      <div class="tempting-verse">
+        <p><span class="verse-ref scripture-ref">Romans 6:23:</span> &ldquo;&hellip; wages of sin is death.&rdquo;</p>
+        <div class="logic-block">
+          <p><em>Statement:</em> sin &rarr; death</p>
+          <p><span class="fallacy-label">Fallacy:</span> &sim;Sin &rarr; &sim;death ; again unless given</p>
+        </div>
+        <p class="comment">It is tempting to argue that &ldquo;wages&rdquo; implies an exclusive transactional relationship and so one would be able to argue that: sin &hArr; death (a bi-conditional), so death &rarr; sin, and hence &sim;sin &rarr; &sim;death. As tempting as this is, this relies on interpretation as opposed to having been strictly given. But beyond that even granting this interpretation, the other direction of the transaction is the refund: given your life back can you erase your sin? Obviously not.</p>
+      </div>
+
+      <div class="tempting-verse">
+        <p><span class="verse-ref scripture-ref">1 Corinthians 15:56:</span> &ldquo;the sting of death is sin.&rdquo; Death&rsquo;s power comes from sin. Too weak for strict logic.</p>
+      </div>
+
+      <div class="tempting-verse">
+        <p><span class="verse-ref scripture-ref">John 14:30 + Hebrews 2:14:</span> Devil has power of death; devil has no claim on Jesus. But &ldquo;A controls B&rdquo; and &ldquo;A can&rsquo;t touch C&rdquo; doesn&rsquo;t give you &ldquo;B can&rsquo;t touch C.&rdquo;</p>
+      </div>
+
+      <div class="tempting-verse">
+        <p><span class="verse-ref scripture-ref">Acts 2:25&ndash;32:</span> &ldquo;Holy One&rdquo; won&rsquo;t see decay. A title, not a deductive chain; i.e. doesn&rsquo;t say Holy One won&rsquo;t see decay because he is holy (sinless); to deduce this I need a verse that says Holiness &rarr; No decay.</p>
+      </div>
+
+      <div class="tempting-verse">
+        <p><span class="verse-ref scripture-ref">Romans 6:9:</span> &ldquo;death no longer has dominion over him.&rdquo; An imperative, not a deductive chain.</p>
+      </div>
+
+      <!-- Summarizing comment -->
+      <h2 class="section-heading">Summarizing Comment on Claim 2</h2>
+
+      <p>The Corinthians accepted Paul&rsquo;s argument and hence the unstated premise that &ldquo;sinlessness implies death cannot hold&rdquo;, and the church has accepted it for over 2000 years. Yet no verse states it, no chain of verses allows it to be deduced, and attempting to deduce it formally fails. The doctrine rests on a claim that every believer makes intuitively but no text supplies explicitly. This points to a limitation of formalism as opposed to a weakness of doctrine. Natural language communicates meaning that formal systems cannot reconstruct from the text alone. The Corinthians accepted this premise based on context, shared assumptions, and theological intuition.</p>
+
+      <!-- Concluding synthesis -->
+      <h2 class="section-heading">Concluding Synthesis</h2>
+
+      <p>This exercise demonstrates that formal logic does not map to natural language cleanly but this does not diminish the claim of either to legitimacy. Formal logic remains a powerful tool for reasoning in spaces where meaning is consistent everywhere and every premise is deducible or stated axiomatically. But natural language allows people to arrive at shared conclusions through shared context even when premises are non-deducible. Whether it is the disciples Jesus was speaking to at the last supper or the Corinthians Paul was writing to, both understood something that in both cases cannot be formalized cleanly from the text.</p>
+    </div>
+
+    <p class="essay-note">Note: This is an ongoing exercise. The search for the undetected premise remains open, and I welcome any reader who can supply what I could not.</p>
+
+    <p class="essay-sign">Njiki Bikoi</p>
+  </div>
+</body>
+</html>
