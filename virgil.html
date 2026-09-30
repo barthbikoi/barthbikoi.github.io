@@ -24,6 +24,10 @@
   </style>
 </head>
 <body>
+  <script>
+    if (!sessionStorage.getItem('auth')) { window.location.href = 'index.html'; }
+  </script>
+
   <div class="container">
     <p class="site-name"><a href="/">barth bikoi</a></p>
     <h1 class="essay-title">Duty That Mourns: Virgil, Augustine, and the Weight of Necessary Violence</h1>

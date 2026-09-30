@@ -24,6 +24,10 @@
   </style>
 </head>
 <body>
+  <script>
+    if (!sessionStorage.getItem('auth')) { window.location.href = 'index.html'; }
+  </script>
+
   <div class="container">
     <p class="site-name"><a href="/">barth bikoi</a></p>
     <h1 class="poem-title">The Rose&rsquo;s Response to Blake and the Worm</h1>
